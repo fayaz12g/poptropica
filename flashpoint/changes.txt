@@ -1,0 +1,92 @@
+The "flashpoint" folder that this text file is located in has multiple folders within it. None of them are used by Poptropica, but they may be helpful for people who are inspecting the curation. The descriptions of each folder are:
+  - customSource - Flash Professional CS5 files used to create the SWFs in the "flashpoint" folder.
+  - originalFiles - Original versions of edited files. The file locations are relative to their original locations in the "www.poptropica.com" folder.
+  - replacedAssets - Vector graphics of original and replaced assets in game SWFs. The "getcard" folder contains files used for the "/popups/getcard.swf" file, and the "poptropolis" folder contains files used for the "/popups/travelmap.swf" file.
+
+Version changes are as follows:
+  - 1.1.0
+    - Features
+      - Mini-quests are now playable. They can also be restarted.
+      - Some items are puchasable in the store.
+      - A PHP file containing PHP code, "/save_image.php", has been created for Poptropica Labs snapshots. This PHP file did not previously exist in the curation.
+    - Changes
+      - The "Save" button will not appear, although its registration menu remains.
+      - Loading a nonexistent scene will show Early Poptropica's main street along with an error message. Originally, the player would be redirected to the start screen.
+      - A "changesList.txt" file has been added to the folder that this file exists in. The new file simply documents every file change made to the curation per version.
+      - This file has been reorganized to improve its readability.
+      - The folder for Poptropica Realms' registration menu - "/scenes/islandLand/" - has been removed because it was unused.
+      - The "/base.php" file has been reprogrammed to be significantly less reliant on Flashpoint's servers when using the curation in Flashpoint Infinity.
+    - Bugfixes
+      - Downward rope exits are no longer affected by a bug that required the player to be in specific locations relative to the exit.
+      - A bug that allowed users to load unapproved save data with the starting scene's "Returning Player" button has been fixed.
+      - Restarting Super Power Island will always disable the player's flying ability.
+      - Restarting Shrink Ray Island will no longer take the player to a nonexistent scene.
+      - The advertisement skipper will no longer give "fatal error" messages unless absolutely necessary.
+      - Obtaining the Counterfeit Island cottage key item no longer adds a copy of it to Early Poptropica Island's inventory.
+      - Invalid image data will not be included in snapshots of Poptropica Labs scenes.
+
+Most PHP files in for the "www.poptropica.com" website didn't need to be programmed, but the following ones have been:
+  - /base.php (edited in 1.1.0)
+  - /get_inventory_menu.php
+  - /index.php
+  - /list_redeemable_items.php (edited in 1.1.0)
+  - /save_image.php (added in 1.1.0)
+  - /time.php
+
+The following files have been intentionally excluded although they may be requested by the curation. The absence of these files will not cause any noticeable errors to occur.
+  - http://www.tania-lynne.com/clients/booksite/info.php - Used by the "/popups/Ghost/binderArchive.swf" file.
+  - /list_items.php - Used by the inventory menu when viewing the "Store Items" category. Documented in version 1.1.0.
+  - /popups/maps/Haunted.swf - Used by the Haunted House quest's island map.
+  - /scenes/*/vendorCart.swf - Used by various island main street scenes.
+  - All promotional material of purchaseable content that is not loaded by the game itself.
+
+Descriptions of various file changes are described below, grouped with the versions of the curation that the changes were made in. For a comprehensive list of every file change, see the "changesList.txt" file located in the same folder as this file.
+
+
+Version 1.0.0
+  "/avatar_body.swf" - Visual quirks that appear when a character's outfit is changed have been removed by making the "undershirt" and "underpants" sprites invisible after a character's outfit fully loads for the first time. For example, a shirt would temporarily appear on an Aztec warrior in Time Tangled Island when they gave the player Edmund Hillary's goggles.
+  "/base.php"
+    - This file has been completely reprogrammed.
+    - When in the game's starting scene, a custom save file named "FlashpointBackup" is used to prevent data loss. Additionally, the "Char" save file has a property named "flashpointReady" that indicates if save data has been properly configured for use in this curation.
+  "/framework.swf" - A bug has been fixed that converted the friends page button's character to a bitmap before verifying that it had fully loaded.
+  "/framework/data/config.xml"
+    - Data for AS2 islands that were ported to AS3 has been changed back to equivalent AS2 data.
+    - Islands exclusive to AS3 have had their data removed.
+  "/gameplay.swf" - A little bit of code has been added to frame 26 that removes unused vendor cart assets from scenes. The code is from later versions of the same file.
+  "/get_inventory_menu.php" - Big Nate Island's name in the inventory menu has been changed from "BigNate" to "Big Nate". The misspelling was used at the time of this curation's creation, but there's evidence that the correct spelling was used up to June of 2013.
+  "/items/item3233.swf" - An eye state in the item's zombification code has been changed because the eye state originally used by the file does not exist. An equivalent that looks the same but has moving pupils is used instead.
+  "/popups/bignate_hangman.swf" - Big Nate Island's hangman popup now changes character asset transparency rather than toggling visibility. This is because toggling visibility causes some character assets to appear when they shouldn't.
+  "/popups/computer.swf" - The rabbot computer popup in 24 Carrot Island has been edited to fix a bug that caused some of Dr. Hare to be shown that was not meant to be.
+  "/popups/getcard.swf" - Part of the item animation has been remade to fix a visual issue that caused a nonexistent button to be highlighted instead of the inventory bag.
+  "/popups/map.swf" - The island restart feature has been remade by editing this file's code to load a scene named "FlashpointIslandRestart" when the player agrees to restart an island.
+  "/popups/travelmap.swf" - Poptropolis Games Island's travel map icon and code have been edited to make the island clickable and replace the ripple effect with a recreation of the original sepia island asset.
+  "/popups/West/photography.swf" - The second frame of Wild West Island's photography minigame file now waits for the player character to load before converting them to a bitmap asset.
+  "/scenes/islandCarrot/sceneAdGroundH3.swf" - A function named "bitmapBackground" has been added because it was missing despite being called. The lack of this function caused the scene's background to not match the rest of the backgrounds in the island.
+
+
+Version 1.1.0
+  "/base.php" - Nearly all of its code has been replaced with equivalent Javascript code.
+  "/char.swf" - A conditional statement in the first frame's "targetControl" function now checks if a character's status is equal to "climbDown" when tracking movieclips.
+  "/flashpoint/restartIsland.swf"
+    - An unused variable has been removed.
+    - Restarting Super Power Island will disable the player's flight ability.
+  "/framework/data/config.xml" - Shrink Ray Island's starting scene name has been changed from "GlobalAS3Embassy" to "ShrinkMain".
+  "/gameplay.swf"
+    - Frame one's "gotoMap" function has been changed to load Early Poptropica's main street and display an error message.
+    - The "btnSave" sprite of sprite 422 in the "/gameplay.swf" file has been moved 1,000 pixels downwards from where it originally was. It should not be clickable in normal gameplay.
+  "/items/item3243.swf" - The background and description text color have been replaced with older versions that match the time period of this curation.
+  "/list_redeemable_items.php" - Extra code for giving a list of available store item cards has been added.
+  "/pop_stats.swf"
+    - The "ConfirmClip" sprite's code now checks if the user is registered, not unregistered, when determining if they can purchase an item.
+    - Frame five of the file does not retrieve cached store data.
+  "/save_image.php" - This file has been recreated. Unlike the original file, it opens the image in a new tab instead of prompting the user to download the image.
+  "/scenes/islandDemo/sceneLandPrototypeAS2.swf" - The "snapshot" function has been edited to fix an off-by-one error that caused invalid image data to be included in scene snapshots.
+  "/scenes/islandEarly/sceneMuseum.swf" - A bug that caused the Counterfeit Island cottage key item to be added to Early Poptropica Island's inventory has been fixed. The bug most likely did not occur to registered accounts in the official game.
+  "/scenes/islandLegendarySwords/sceneCaveContinued.swf" - Code has been edited so that obtaining the Rusty Relic sword no longer makes the game attempt to add every store costume that has a sword. The costumes do not currently exist in the curation.
+  "/scenes/islandVillain/sceneAdGroundH25.swf",
+  "/scenes/islandVillain/sceneOilControlRoom.swf",
+  "/scenes/islandVillain/sceneVillainMain.swf" - Door data for the oil control room has been fixed. Previously it used regular door data rather than data specifically for advertisement transition scenes.
+  "/scenes/Global/sceneGlobalBlimpGame5.swf"
+    - The "entity.character.Character" class' "convertFromNpcFormat" function's code has been modified because nearly all of it was programmed incorrectly.
+    - Extra code has been added to the "entity.character.Character" class' "updateLook" function. It originally did not make the game load a character's updated outfit.
+    - The "entity.character.Look" class was renamed to "entity.character.Look2" to prevent code conflicts with the "/popups/BlimpGame/dialog.swf" file.
